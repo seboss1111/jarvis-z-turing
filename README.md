@@ -14,6 +14,8 @@ Permet de jouer avec Jarvis en mode Turing.
 
 Les discutions sont différentes à chaque fois...
 
+(Projet en cours de développement...)
+
 ## Usage
 ```
 You: On Discute ?
@@ -29,9 +31,9 @@ Jarvis: Enchanté Pascal, je peux commencer par poser une question ?
 You: oui va y
 Jarvis: Quel est ton sport préféré ?
 
-You: ON ARRRETTE
+You: on arrêtte.
 
-Et là ca bug.... lol
+Et là ca bug.... impossible à arrêter...  lol
 
 ...
 ...
