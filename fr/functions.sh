@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 jv_pg_ct_verifavecquijeparle () {
 if [ "$NOMAQUI" = " " ]; then
 echo "Mais je ne te connais pas !"
