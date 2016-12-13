@@ -10,18 +10,33 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-Permet de faire des calculs mathematiques sur les operations de base: additions, soustractions, multiplications et divisions.
+Permet de jouer avec Jarvis en mode Turing.
+
+Les discutions sont différentes à chaque fois...
 
 ## Usage
 ```
-You: Calcul deux fois quatre
-Jarvis: 2 * 4 est egale a 8
+You: On Discute ?
+Jarvis:  moi c'est Jarvis, tu es bien jibé ?
 
-You: Calcul 12 multiplié par deux
-Jarvis: 12 * 2 est egale a 24
+You:non
+Jarvis:comment puis je t'appeler ? 
 
-You: Calcul 5 divisé par deux
-Jarvis: 5 divise par 2 est egale a 2.50
+
+You: Pascal
+Jarvis: Enchanté Pascal, je peux commencer par poser une question ?
+
+You: oui va y
+Jarvis: Quel est ton sport préféré ?
+
+You: ON ARRRETTE
+
+Et là ca bug.... lol
+
+...
+...
+...
+
 
 
 ```
