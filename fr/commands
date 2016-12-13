@@ -1,0 +1,63 @@
+*EEE*==say "essai question" 
+>(*)==say "$(jv_pg_ct_renvoiquestion)"
+
+*ON*DISCUTE*|*TU VEU*PARLER*== say "$(jv_pg_ct_moicest), $(jv_pg_ct_jesuisavec)"
+>*OUI*==say "$(jv_pg_ct_bonjournom)";commands="$(jv_get_commands)"; jv_handle_order "GOTO$[($RANDOM % 2) + 1]"; return
+>*NON*== say "$(jv_pg_ct_avecquijeparle) " 
+>>*== NOMAQUI=$order && echo "" > ~/nomaqui.txt && echo "$NOMAQUI" >> ~/nomaqui.txt && say "ok $order"; commands="$(jv_get_commands)"; jv_handle_order "GOTO$[($RANDOM % 2) + 1]"; return
+
+GOTO1==say "$(jv_pg_ct_citationt)"
+>(*)==say "$(jv_pg_ct_renvoiquestion)"
+>>(*)==say "Ha ok, $(jv_pg_ct_ettoi)"
+>>>(*)==say "$(jv_pg_ct_questionON)"
+>>>>*OUI*==say "Pour moi, $(jv_pg_ct_questionON)"
+
+GOTO2==say "Je peux te poser une question ?"
+>*OUI*==commands="$(jv_get_commands)"; jv_handle_order "GOTO3"; return
+>*NON*==say "temps pi !"
+
+GOTO3==say "ok, $(jv_pg_ct_QUESTIONHASARD)"
+>(*)==say "$(`$(echo cat ~/choixquestion.txt)`) passons à toi..."; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
+>(*)==say "$(`$(echo cat ~/choixquestion.txt)`) passons à toi..."; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
+
+GOTO4==bypass=false; say "Ok $(cat ~/nomaqui.txt) on arrête notre conversation."
+
+
+*PRENOM*==say "Que se passe t-il tu n'aimes pas ton prénom ? $NOMAQUI ?"
+
+*TU VAS BIEN*==say "$(jv_pg_ct_ReponseO), et toi ?"
+>*OUI*|*CA VA*|*MERCI*==say "$(jv_pg_ct_ReponsePoitive)"
+>*NON*|*PAS*==say "$order, $(jv_pg_ct_QuetionouverteN)"
+>>(*)==say "$(jv_pg_ct_RenvoieQuetionP)"
+>>>*OUI*|OK*==say "$(jv_pg_ct_ReponsePoitive)"
+>>>*NON*==say "$(jv_pg_ct_ReponseN)"
+
+*CA VA*==say "très bien et toi?"
+>*OUI*==say "ravi de l'entendre."
+>*NON*==say "j'en suis navré, dois-je te laisser tranquille?"
+>>*OUI*==say "Au revoir $username"
+>>*NON*==say "Ok je reste, tu veux que je te fasse rire ?"
+>>>*OUI*==say "le plus beau des êtres que je connaisse c'est toi, petit canaillou !"
+>>>*NON*==say "Ok je te laisse tranquille"
+
+*ET TOI*==say "Et moi quoi ?"
+*ES-TU*==say "$(jv_pg_ct_QuetionouverteP)"
+*MOI*==say "essaye d'être moin personnel, parle des autres plus que de toi et en positif surtout ok ?"
+*OUI*==say "$(jv_pg_ct_OUI)"
+*NON*==say "$(jv_pg_ct_NON)"
+*POURQUOI*==say "$(jv_pg_ct_pourquoi)"
+*PEUT*ETRE*|*PAS*SUR*==say "$(jv_pg_ct_PASSUR)"
+*lol*|TU ME FAIS RIRE*==say "$(jv_pg_ct_RIRE)"
+*TA GUEULE*|*FILS DE*|*SALOPE*|*CONNASSE*|*PUT*|*POUFIASSE*|*CONNARD*==say " $(jv_pg_ct_GROSMOT)"
+*JE*M*ENNUI*==say "$(jv_pg_ct_MOTIVATION)" 
+COMMENT*APPEL*==say "Je m'appelle $trigger et toi ?"
+>(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
+>(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
+*AN*==say "$(jv_pg_ct_AGE)"
+*ESSAI*==say "$(jv_pg_ct_ESSAI)"
+
+*ENVO* MESSAGE*==say "A qui voulez-vous envoyer un message?"
+>*==if [ "$order" = "alex" ]; then say "Quel est le contenu du message pour $order"; else say "Je ne connais pas $order. Annulation."; commands="$(jv_get_commands)"; return; fi
+>>*==say "Voici votre message: $order. L'envoyer?"
+>>>*== say "Ok"
+
