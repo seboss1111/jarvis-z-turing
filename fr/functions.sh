@@ -6,7 +6,6 @@ echo "--> $var"
 
 if [ -d "$CHEMIN" ]; then 
 # fichier existe
-echo "Existe !!!!!"
 NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
 return
 else 
