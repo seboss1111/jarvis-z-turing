@@ -2,14 +2,12 @@
 
 jv_pg_ct_verifavecquijeparle () {
 var="$CHEMIN/nomaqui.txt"
-echo "--> $var"
 
-if [ -d "$CHEMIN" ]; then 
+if [ -d "$CHEMIN" ]; then
 # fichier existe
 NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
 return
-else 
-echo "N'Existe  pas !!!!!"
+else
 echo "C'est la premi√®re fois que quelqu'on me parle... "
 mkdir -p $CHEMIN
 NOMAQUI="Alexandre Mely"
@@ -51,7 +49,6 @@ jv_pg_ct_verifavecquijeparle
 jv_pg_ct_jesuisavec () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle
-echo "--ËË--"
 NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
   citations=("tu es bien $NOMAQUI, je ne suis pas s√ªr ?" "excuse-moi, c'est bien $NOMAQUI qui me parle ?" "super mais est-ce bien $NOMAQUI au micro ?" "c'est qui a la ligne, $NOMAQUI ?" "c'est toi $NOMAQUI qui discute avec moi ?" "Je ne te reconnais pas c'est toi $NOMAQUI ?" "j'aime bien savoir avec qui je parle, c'est bien $NOMAQUI ?")
   echo "${citations[$RANDOM % ${#citations[@]} ]}"
