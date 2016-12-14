@@ -11,11 +11,10 @@ NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
 return
 else 
 echo "N'Existe  pas !!!!!"
-echo "C'est la première fois que quelqu'on me parle... "
+echo "C'est la premiÃ¨re fois que quelqu'on me parle... "
 mkdir -p $CHEMIN
 NOMAQUI="Alexandre Mely"
 echo  > $CHEMIN/nomaqui.txt && echo "$NOMAQUI" >> $CHEMIN/nomaqui.txt
-echo  "fin"
 reutrn
 fi
 }
