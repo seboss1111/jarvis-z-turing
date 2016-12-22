@@ -12,28 +12,27 @@ For multi-language plugin:
 ## Description
 Permet de jouer avec Jarvis en mode Turing.
 
-Les discutions sont différentes à chaque fois...
+Les discutions sont differentes a chaque fois...
 
-(Projet en cours de développement...)
+(Projet en cours de developpement...)
 
 ## Usage
 ```
 You: On Discute ?
-Jarvis:  moi c'est Jarvis, tu es bien jibé ?
+Jarvis:  moi c'est Jarvis, tu es bien jibe ?
 
 You:non
 Jarvis:comment puis je t'appeler ? 
 
 
 You: Pascal
-Jarvis: Enchanté Pascal, je peux commencer par poser une question ?
+Jarvis: Enchante Pascal, je peux commencer par poser une question ?
 
 You: oui va y
-Jarvis: Quel est ton sport préféré ?
+Jarvis: Quel est ton sport prefere ?
 
 You: on arrêtte.
-
-Et là ca bug.... impossible à arrêter...  lol
+Jarvis: Ok fin de notre conversation...
 
 ...
 ...
@@ -44,4 +43,4 @@ Et là ca bug.... impossible à arrêter...  lol
 ```
 
 ## Author
-[Jean-Bernard Hallez](https://github.com/Jean-Bernard-Hallez/jarvis-plugin-math.git)
+[Jean-Bernard Hallez](https://github.com/Jean-Bernard-Hallez/Jarvis-Turing)
