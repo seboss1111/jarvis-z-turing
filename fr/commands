@@ -1,20 +1,19 @@
-*EEE*==say "essai question" 
->(*)==say "$(jv_pg_ct_QUESTIONHASARD)" 
->>(*)==say "$(`$(echo cat $CHEMIN/choixquestion.txt)`) passons à toi..."; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
 
-*FFF*==say "essai question" 
->(*)==say "$(jv_pg_ct_QUESTIONHASARD6)" 
-  
 *ON*DISCUTE*|*ON*PARLER*== say "$(jv_pg_ct_affirmatif) $(jv_pg_ct_moicest), $(jv_pg_ct_jesuisavec)"
 >*OUI*==say "$(jv_pg_ct_bonjournom)";commands="$(jv_get_commands)"; jv_handle_order "GOTO$[($RANDOM % 2) + 1]"; return
->*NON*== say "$(jv_pg_ct_avecquijeparle) " 
+>*NON*==say "$(jv_pg_ct_avecquijeparle) " 
 >>*== say "$(jv_pg_ct_enreglenom) $(jv_pg_ct_affirmatif1) $order"; commands="$(jv_get_commands)"; jv_handle_order "GOTO$[($RANDOM % 2) + 1]"; return
 
 GOTO1==say "$(jv_pg_ct_citationt)"
+>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >(*)==say "$(jv_pg_ct_renvoiquestion)"
+>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>(*)==say "Ha ok, $(jv_pg_ct_ettoi)"
+>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>>(*)==say "$(jv_pg_ct_questionON)"
+>>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>>>(*)==say "Pour moi, $(jv_pg_ct_questionON)"
+>>>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>>>>(*)==say "$(jv_pg_ct_FINDECONVERSAION)"
 
 GOTO2==say "$(jv_get_jeposequestion)"
@@ -25,41 +24,46 @@ GOTO3==say "ok, $(jv_pg_ct_QUESTIONHASARD)"
 >(*)==say "$(`$(echo cat $CHEMIN/choixquestion.txt)`) passons à toi... "; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
 >(*)==say "$(`$(echo cat $CHEMIN/choixquestion.txt)`) passons à toi... "; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
 
-GOTO4==say "Ok $(cat $CHEMIN/nomaqui.txt) on arrête notre conversation."; bypass=false; break
-
+GOTOFIN==say "$STOPCONVERSATION";commands="$(jv_get_commands)"; jv_handle_order "GOTOFINOK"
+GOTOFINOK==
 
 *PRENOM*==say "Que se passe t-il tu n'aimes pas ton prénom ? $NOMAQUI ?"
 
 *TU VAS BIEN*==say "$(jv_pg_ct_ReponseO), et toi ?"
 >*OUI*|*CA VA*|*MERCI*==say "$(jv_pg_ct_ReponsePoitive)"
 >*NON*|*PAS*==say "$order, $(jv_pg_ct_QuetionouverteN)"
+>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>(*)==say "$(jv_pg_ct_RenvoieQuetionP)"
 >>>*OUI*Y*==say "$(jv_pg_ct_ReponsePoitive)"
 >>>*NON*==say "$(jv_pg_ct_ReponseN)"
+>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 
-*CA VA*==say "très bien et toi?"
->*OUI*==say "ravi de l'entendre."
+*CA VA*==say"$(jv_pg_ct_QUESTIONHASARD4)"
+>*OUI*==say "jv_pg_ct_QUESTIONHASARD4"
 >*NON*==say "j'en suis navré, dois-je te laisser tranquille?"
+>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>*OUI*==say "Au revoir $username"
 >>*NON*==say "Ok je reste, tu veux que je te fasse rire ?"
->>>*OUI*==say "le plus beau des êtres que je connaisse c'est toi, petit canaillou !"
+>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
+>>>*OUI*==say "$(jv_pg_ct_HISTOIRCOURTE)"
 >>>*NON*==say "Ok je te laisse tranquille"
+>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 
 *ET TOI*==say "Et moi quoi ?"
 *ES-TU*==say "$(jv_pg_ct_QuetionouverteP)"
 *MOI*==say "essaye d'être moin personnel, parle des autres plus que de toi et en positif surtout ok ?"
-*OUI*==say "$(jv_pg_ct_OUI)"
+*OUI*|*OK*==say "$(jv_pg_ct_OUI)"
 *NON*==say "$(jv_pg_ct_NON)"
 *POURQUOI*==say "$(jv_pg_ct_pourquoi)"
 *PEUT*ETRE*|*PAS*SUR*==say "$(jv_pg_ct_PASSUR)"
 *lOl*|*RIRE*==say "$(jv_pg_ct_RIRE)"
-*MERSI*==say "$(jv_pg_ct_MERCI)"
+*MERCI*==say "$(jv_pg_ct_MERCI)"
 *TA GUEULE*|*FILS DE*|*SALOPE*|*CONNASSE*|*PUT*|*POUFIASSE*|*CONNARD*==say " $(jv_pg_ct_GROSMOT)"
+*PARDON*==say "$(jv_pg_ct_PARDON)"
 *JE*M*ENNUI*==say "$(jv_pg_ct_MOTIVATION)" 
 COMMENT*APPEL*==say "Je m'appelle $trigger et toi ?"
 >(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
 >(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
 *ESSAI*==say "$(jv_pg_ct_ESSAI)"
 *QUEL*AGE*|*ANNE*==say "$(jv_pg_ct_AGE)"
-
-
+(*)==say "$(jv_pg_ct_PASCOMPRIS)"

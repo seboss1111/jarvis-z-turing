@@ -1,5 +1,21 @@
 #!/bin/bash
 
+jv_pg_ct_STOP () {
+jv_pg_ct_PARDON
+local veriforder=(jv_sanitize "$order")
+if [ "$veriforder" = "arrete" ] ; then
+eco "$STOPCONVERSATION"
+exit
+#commands="$(jv_get_commands)"; jv_handle_order "GOTOFIN"
+fi
+}
+
+
+jv_pg_ct_QU () {
+if jv_yesno "question?"; then
+echo "Yes !!!!"
+fi
+}
 jv_pg_ct_verifavecquijeparle () {
 var="$CHEMIN/nomaqui.txt"
 
@@ -27,12 +43,6 @@ jv_pg_ct_enreglenom () {
 NOMAQUI=$order
 echo  > $CHEMIN/nomaqui.txt && echo "$NOMAQUI" >> $CHEMIN/nomaqui.txt
 mkdir -p $CHEMIN/$NOMAQUI
-}
-
-jv_pg_ct_STOP () {
-if [ "$order" = "stop" ]; then
-echo "STOP enregistré... "; commands="$(jv_get_commands)"; jv_handle_order "GOTO4"; bypass=false; break
-fi
 }
 
 jv_pg_ct_quitacreer () {
@@ -102,7 +112,7 @@ NOMAQUI=`echo $(cat  $CHEMIN/nomaqui.txt)`
 jv_get_jeposequestion () {
 jv_pg_ct_STOP
 NOMAQUI=`echo $(cat  $CHEMIN/nomaqui.txt)`
-  citations=("Je peux te poser une question ?, " "J'aimerai commencer, puis-je te poser une question ?" "Si ca ta dérange pas, c'est moi qui te pose d'abord une question ok ?" "Je veux bien mais j'envie de te poser un question, je peux ?" "Ok, tu me donne envie de te poser une question puis-je ?" "Ho toi ! Je peux te poser une question en premier ?")
+  citations=("Je peux te poser une question ?, " "J'aimerai commencer, puis-je te poser une question ?" "Si ça ta dérange pas, c'est moi qui te pose d'abord une question ok ?" "Je veux bien mais j'envie de te poser une question, je peux ?" "Ok, tu me donnes envie de te poser une question puis-je ?" "Ho toi ! Je peux te poser une question en premier ?")
   echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -111,7 +121,7 @@ jv_pg_ct_citationt () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle
 
-    citations=("Tu veux parler de quoi ?" "Je t'écoute, que veux-tu ?" "Ok, je suis prét, que souhaites tu ?" "Dis moi, je t'écoute ?" "Quel question veux tu me poser ?" "Qu'est ce qui t'arrive ?" "Que veux tu, je t'écoute ?" "Pose moi ta question ?" "J'ai 5 minutes que veux tu ?" "Tu t'ennuyais tu veux me parler ?" "Je suis hereux de t'�couter que veux tu ?")
+    citations=("Tu veux parler de quoi ?" "Je t'écoute, que veux-tu ?" "Ok, je suis prét, que souhaites tu ?" "Dis moi, je t'écoute ?" "Quel question veux-tu me poser ?" "Qu'est ce qui t'arrive ?" "Que veux tu, je t'écoute ?" "Poses-moi ta question ?" "J'ai 5 minutes que veux-tu ?" "Tu t'ennuyais et tu veux me parler ?" "Je suis hereux de t'écouter que veux-tu me demander ?" "Question pour un champion je t'écoute ?" "Vas-y mon loulou  ! qu'est ce qu'il t'arrive ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -119,7 +129,7 @@ jv_pg_ct_renvoiquestion () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle
 
-citations=("1 Tu as quel age ?" "2 Quel est ta couleur préféré ?" "3 Quel sport aime tu faire ? " "4 est-ce que ca va ?" "5 Quel est ton film préféré ? " "6 qu'est ce que tu aimes manger ?" "7 Tu es marié ?" "8 Tu as combien de frères et soeur ?")
+citations=("1 Tu as quel age ?" "2 Quel est ta couleur préféré ?" "3 Quel sport aime tu faire ? " "4 est-ce que ça va ?" "5 Quel est ton film préféré ? " "6 qu'est ce que tu aimes manger ?" "7 Tu es marié ?" "8 Tu as combien de frères et soeur ?")
 
 
  [ $(grep -o "age" <<< "$order") ] && jv_pg_ct_AGE
@@ -158,19 +168,19 @@ jv_pg_ct_verifavecquijeparle
 
 jv_pg_ct_ReponseO () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Oui trés bien $NOMAQUI" "Merveilleusement bien merci" "Ca va mieux qu'hier" "Je suis en forme" "Parfaitement bien" "Nickel chrome $NOMAQUI" "je me sens génialement bien" "en pleine forme" "oui tranquillement")
+    citations=("Oui trés bien $NOMAQUI" "Merveilleusement bien merci" "ça va mieux qu'hier" "Je suis en forme" "Parfaitement bien" "Nickel chrome $NOMAQUI" "je me sens génialement bien" "en pleine forme" "oui tranquillement")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_ReponseN () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Non pas vraiment, $NOMAQUI" "Non pas du tout" "a peut aller mieux" "Je ne suis pas en forme" "Un peu fatigué" "ca pourrait aller mieux" "il y a des jours sans mais ca va aller mieux" "j'ai mal dormi du coup je suis fatigué" "je me suis pris la tête avec mes données binaires")
+    citations=("Non pas vraiment, $NOMAQUI" "Non pas du tout" "a peut aller mieux" "Je ne suis pas en forme" "Un peu fatigué" "ça pourrait aller mieux" "il y a des jours sans mais ça va aller mieux" "j'ai mal dormi du coup je suis fatigué" "je me suis pris la tête avec mes données binaires")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_ReponsePoitive () {
 jv_pg_ct_verifavecquijeparle
-    citations=("A parfait, $NOMAQUI, continue comme ca" "Ok tant mieux" "c'est trés bien" "J'en suis heureuse" "Je suis satisfaite de l'entendre" "continue a être positif" "j'adore t'entendre parler ainsi" "ho oui $NOMAQUI c'est génial")
+    citations=("A parfait, $NOMAQUI, continue comme ça" "Ok tant mieux" "c'est trés bien" "J'en suis heureuse" "Je suis satisfaite de l'entendre" "continue a être positif" "j'adore t'entendre parler ainsi" "ho oui $NOMAQUI c'est génial")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -182,25 +192,25 @@ jv_pg_ct_verifavecquijeparle
 
 jv_pg_ct_QuetionouverteN () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Pourquoi ?, $NOMAQUI" "C'est à  dire ?" "Mais encore ? pourquoi ca ne va pas" "Depuis quand ?" "Pourquoi c'est si dur que ca ?" "Continue ?" "Développe un peu plus" "Que dirais tu de plus ?" "Tu en penses quoi ?")
+    citations=("Pourquoi ?, $NOMAQUI" "C'est à  dire ?" "Mais encore ? pourquoi ça ne va pas" "Depuis quand ?" "Pourquoi c'est si dur que ça ?" "Continue ?" "Développe un peu plus" "Que dirais-tu de plus ?" "Tu en penses quoi ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_QuetionouverteP () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Pourquoi ?, $NOMAQUI" "C'est à  dire ?" "Mais encore ? pourquoi ca va si bien " "Depuis quand ?" "C'est si bien que ca ?" "Continue ?" "Développe un peu plus" "Que dirais tu de plus ?" "Tu en penses quoi ?")
+    citations=("Pourquoi ?, $NOMAQUI" "C'est à  dire ?" "Mais encore ? pourquoi ça va si bien " "Depuis quand ?" "C'est si bien que ça ?" "Continue ?" "Développe un peu plus" "Que dirais tu de plus ?" "Tu en penses quoi ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_RenvoieQuetionP () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Que peux tu faire pour que ca aille mieux ?, $NOMAQUI" "il te faut être plus positif ok ?" "Fait de ton mieux Ok ?" "Tu peux changer la donne, n'est ce pas ?" "Il y a pire que ca on est ok ?" "Il y a toujours une solution n'est ce pas ?" "Aller courage, je sais que tu en as pas vrai $NOMAQUI ?")
+    citations=("Que peux tu faire pour que ça aille mieux ?, $NOMAQUI" "il te faut être plus positif ok ?" "Fait de ton mieux Ok ?" "Tu peux changer la donne, n'est ce pas ?" "Il y a pire que ça on est ok ?" "Il y a toujours une solution n'est ce pas ?" "Aller courage, je sais que tu en as pas vrai $NOMAQUI ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_OUI () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Ca au moins c'est positif ?, $NOMAQUI" "Continue comme ca..." "Et pourquoi pas non ?" "Oui moi aussi... " "Je suis fier de l'entendre")
+    citations=("ça au moins c'est positif ?, $NOMAQUI" "Continue comme ça..." "Et pourquoi pas non ?" "Oui moi aussi... " "Je suis fier de l'entendre")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -214,32 +224,80 @@ jv_pg_ct_verifavecquijeparle
 
 jv_pg_ct_PASSUR () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Comment ca pas sur ?, $NOMAQUI" "Ha bon ?" "Et Pourquoi ?" "C'est à  dire ?" "il y a toujours mieux de pas sur..." "ha... c'est ton dernier mot ?")
+    citations=("Comment ça pas sur ?, $NOMAQUI" "Ha bon ?" "Et Pourquoi ?" "C'est à  dire ?" "il y a toujours mieux de pas sur..." "ha... c'est ton dernier mot ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_RIRE () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Toi aussi tu me fais rire !, $NOMAQUI" "Sacré $NOMAQUI" "Tu as le sens de l'humour..." "Ca me fait rire aussi ?" "Je souris... Ca se voit ?" "ha... ha ha !" "très drôle !" "tu es rigolo !")
+    citations=("Toi aussi tu me fais rire !, $NOMAQUI" "Sacré $NOMAQUI" "Tu as le sens de l'humour..." "ça me fait rire aussi ?" "Je souris... ça se voit ?" "ha... ha ha !" "très drôle !" "tu es rigolo !")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_GROSMOT () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Et bien que vous êtes grossier !! Vous devriez parler mieux que cela !!" "C'est pas bien ce ue vous dites, $NOMAQUI" "Tu as le sens de l'humour..." "Aprends a parler mieux s'il te plait" "Je suis outrait !" "Que dis tu vilain personnage" "C'est pas moi qui parle comme ca")
-    echo "${citations[$RANDOM % ${#citations[@]} ]}"
+
+var="$CHEMIN/$NOMAQUI/poli.txt"
+
+if [ -e "$var" ]; then
+# fichier existe
+POLI=`echo $(cat $CHEMIN/$NOMAQUI/poli.txt)`
+POLI=`echo "$POLI + 1" | bc -l`
+echo "" > $CHEMIN/$NOMAQUI/poli.txt && echo "$POLI" >> $CHEMIN/$NOMAQUI/poli.txt
+	if [ $POLI -ge "5" ]; then
+	jv_error "GROSSIER PERSONNAGE DEMANDES-MOI PARDON !!!!!!!!!!!!"
+	# mv ./commands ./commands.old
+	# echo  > �home/pi/jarvis/plugins/jarvis-Turing/fr/commands && echo "*PARDON*==say "$(jv_pg_ct_PARDON)"" >> home/pi/jarvis/plugins/jarvis-Turing/fr/commands
+	return
+	fi
+
+	else
+echo "C'est la première fois que l'on me dit un gros-mot !!!... "
+mkdir -p $CHEMIN/$NOMAQUI
+echo  > $CHEMIN/$NOMAQUI/poli.txt && echo "1" >> $CHEMIN/$NOMAQUI/poli.txt
+return
+fi
+    citations=("Et bien que vous êtes grossier !! Vous devriez parler mieux que cela !!" "C'est pas bien ce que vous dites, $NOMAQUI" "Tu as le sens de l'humour..." "Aprends a parler mieux s'il te plait" "Je suis outrait !" "Que dis tu vilain personnage" "C'est pas moi qui parle comme ça !")
+    jv_error "${citations[$RANDOM % ${#citations[@]} ]}"
 }
+
+
+jv_pg_ct_PARDON () {
+jv_pg_ct_verifavecquijeparle
+var="$CHEMIN/$NOMAQUI/poli.txt"
+if [ -e "$var" ]; then
+# fichier existe
+POLI=`echo $(cat $CHEMIN/$NOMAQUI/poli.txt)`
+	if [ $POLI -ge "5" ]; then
+		if [ $order = "pardon" ]; then
+    #    mv ./plugins/jarvis-Turing/fr/commands.old ./plugins/jarvis-Turing/fr/commands
+    citations=("Pardon pris en compte, surveille ton language merci..." "Je n'ai pas apprécié ton attitude !! mais je tolère ton pardon." "Qui t'a appris à parler ainsi, ca m'a fait mal de t'entendre me traiter ainsi, pardon pris en compte." "Pourquoi es-tu si vilain avec moi ? je n'ai pas apprécié mais je te pardonne")
+    echo "${citations[$RANDOM % ${#citations[@]} ]}"
+		echo  > $CHEMIN/$NOMAQUI/poli.txt && echo "3" >> $CHEMIN/$NOMAQUI/poli.txt
+		return
+		fi
+	fi
+	if [ $POLI -ge "5" ]; then
+	jv_error "GROSSIER PERSONNAGE DEMANDES-MOI PARDON !!!!!!!!!!!!"
+	exit
+	fi
+	
+fi
+
+[ $(grep -o "pardon" <<< "$order") ] && echo "Pourquoi me dis-tu pardon tu es poli !!"
+}
+
 
 jv_pg_ct_MOTIVATION () {
 jv_pg_ct_verifavecquijeparle
- citations=("Fais quelque chose pour te motiver" "Va danser ca ira mieux, $NOMAQUI" "Va faire un peu de sport !" "Tu es seul au monde, mon pauvre petit ?" "Moi aussi... snif..." "Regarde la Télévision" "Fait un calin à  quelqu'un" "Si seulement je pouvais te serrer dans les bras" "Changes tes idées")
+ citations=("Fais quelque chose pour te motiver" "Va danser ça ira mieux, $NOMAQUI" "Va faire un peu de sport !" "Tu es seul au monde, mon pauvre petit ?" "Moi aussi... snif..." "Regarde la Télévision" "Fait un çalin à  quelqu'un" "Si seulement je pouvais te serrer dans les bras" "Changes tes idées")
  echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_QUESTIONHASARD () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
-citations=("1 Tu as quel age ?" "2 Quel est ta couleur préféré ?" "3 Quel sport aime tu faire ? " "4 est-ce que ca va ?" "5 Quel est ton film préféré ? " "6 qu'est ce que tu aimes manger ?" "7 Tu es marié ?" "8 Tu as combien de frères et soeur ?" "Fin")
+citations=("1 Tu as quel age ?" "2 Quel est ta couleur préféré ?" "3 Quel sport aime tu faire ? " "4 est-ce que ça va ?" "5 Quel est ton film préféré ? " "6 qu'est ce que tu aimes manger ?" "7 Tu es marié ?" "8 Tu as combien de frères et soeur ?" "Fin")
 
 lacita=`echo "${citations[$RANDOM % ${#citations[@]} ]}"`
 QUESTIONHASARD=`echo "$lacita" | cut -c3-`
@@ -279,7 +337,7 @@ echo  > $CHEMIN/$NOMAQUI/QUESTIONHASARD1.txt && echo "$order" >> $CHEMIN/$NOMAQU
 AGE=`echo "$order" | cut -d" " -f1`
 
 if [ "$AGE" -le "13" ]; then
-echo "Tu es encore un enfant de $AGE ans !, écoute tes parents car il t'aime beaucoup"
+echo "Tu es encore un enfant de $AGE ans !, écoute tes parents çar il t'aime beaucoup"
 fi
 
 if ([ "$AGE" -ge "14" ] && [ "$AGE" -le "17" ]); then
@@ -287,7 +345,7 @@ echo "Tu es un adolescent de $AGE ans !, soit fort et positif durant toute cette
 fi
 
 if [ "$AGE" = "18" ]; then
-echo "$AGE ans ! Te voil�  Majeur !!! ouaouuuu !"
+echo "$AGE ans ! Te voilà  Majeur !!! ouaouuuu !"
 fi
 
 if ([ "$AGE" -ge "31" ] && [ "$AGE" -le "38" ]); then
@@ -319,7 +377,7 @@ echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_PREPOSITIONSAFFIMATIVE () {
-citationsa=("$order original" "ca me va le $order" "tres bien $order" "ca te plait $order" "interessant $order " "pourquoi pas $order" "du $order" "c'est ainsi que $order te plait" "Ok tu aimes le $order" "le $order " "daccord pour toi c'est le $order" "Ha ! le $order" "Hummm le $order" "intérrésant le $order" "j'aime beaucoup le $order" "j'aime bien aussi le $order" "Cool le $order")
+citationsa=("$order original" "ça me va le $order" "tres bien $order" "ça te plait $order" "interessant $order " "pourquoi pas $order" "du $order" "c'est ainsi que $order te plait" "Ok tu aimes le $order" "le $order " "daccord pour toi c'est le $order" "Ha ! le $order" "Hummm le $order" "intérrésant le $order" "j'aime beaucoup le $order" "j'aime bien aussi le $order" "Cool le $order")
 echo "${citationsa[$RANDOM % ${#citationsa[@]} ]}"
 }
 
@@ -357,7 +415,7 @@ resultat1=$(jv_pg_wk_search "$order")
 if [ "$resultat1" = "Je n'ai rien trouvé" ]; then 
 resultat1="Je n'ai rien trouvé de mieux"
 fi
-citations=("le traitement informatique" "créer des programmes" "la domotique" "envoyer des emails" "faire des calculs" "jouer au plus petit ou plus grand" "faire la puce informatique" "surfer sur le net" "aller sur des nouveau site internet")
+citations=("le traitement informatique" "créer des programmes" "la domotique" "envoyer des emails" "faire des çalculs" "jouer au plus petit ou plus grand" "faire la puce informatique" "surfer sur le net" "aller sur des nouveau site internet")
 resultat2=`echo "${citations[$RANDOM % ${#citations[@]} ]}"`
 citations2=("ce n'est pas vraiment du sport je sais bien." "Dans ma petite boite informatique ou je suis je ne peux pas faire autrement" "je ne suis qu'un ordinateur" "je vais te faire rire mais je ne peux pas me déplacer !" "et oui je n'ai pas la possibilité de faire autrement n'est ce pas !" "Tu as la chance d'être un être humain !" "Toi avec tes 5 sens tu as plus de possibilité que moi" "je fais avec mes moyens" "je fais comme je peux" "je fais ce que je sais faire")
 resultat3=`echo ${citations2[$RANDOM % ${#citations2[@]} ]}`
@@ -368,14 +426,14 @@ jv_pg_ct_QUESTIONHASARD4 () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 echo  > $CHEMIN/$NOMAQUI/QUESTIONHASARD4.txt && echo "$order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD4.txt
-# Est ce que ca va?
+# Est ce que ça va?
 if [ "$order" = "oui" ]; then 
-citations=("a tant mieux" "je suis content" "cool" "Ca fait du bien a attendre car quand ca va pour les autres ca va pour soit" "c'est une bonne nouvelle" "ravi pour toi")
+citations=("a tant mieux" "je suis content" "cool" "ça fait du bien a attendre çar quand ça va pour les autres ça va pour soit" "c'est une bonne nouvelle" "ravi pour toi")
  echo "${citations[$RANDOM % ${#citations[@]} ]}"
 fi
 
 if [ "$order" = "non" ]; then 
-citations=("a bon ! ca ne va pas ? raconte " "A mince qu'est ce qu'il t'arrive ?" "Tu veux en parler ?" "Et pourquoi ?")
+citations=("a bon ! ça ne va pas ? raconte " "A mince qu'est ce qu'il t'arrive ?" "Tu veux en parler ?" "Et pourquoi ?")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
 fi
 }
@@ -420,7 +478,7 @@ echo  > $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt && echo "$order" >> $CHEMIN/$NOMAQU
 
 citations1=("$order Génial, " "$order Excellent, " "$order Super, " "$order Ouaou, " "$order Moi, " "$order, de mon coté, " "$order Ha oui !,")
 
-citations=(" Personnelement" " moi " "nous sommes une famille nombreuse " "car" "en tout " "voilà , ")
+citations=(" Personnelement" " moi " "nous sommes une famille nombreuse " "çar" "en tout " "voilà , ")
 
 citations2=("j'ai 2 fréres et 2 soeurs" "j'ai 2 soeurs, Alicia et Justine, et 2 frères Lorenzo et Valentin" "j'ai 2 soeurs, Alicia et Juju, et 2 frères Lorenzo et Vava")
 # echo "${citations[$RANDOM % ${#citations[@]} ]} 
@@ -450,6 +508,22 @@ jv_pg_ct_STOP
 citations=("Je suis HS... j'arrête la conversation, désolé." "Désolé, je vais me reposer... je stop la conversation..." "Ce fut génial notre conversation mais je dois y aller au revoir..." "Je suis pressé je dois y aller Au revoir..." "Il est tant pour moi d'y aller, je coupe la conversation... Désolé..." "Je te souhaite une bonne journée, je dois y aller...Désolé..." "Fin de la communication, je dois aller régler mes problèmes de puces informatiques... Désolé..." "Je suis obligé d'y aller, je coupe notre conversation...")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
+
+
+jv_pg_ct_HISTOIRCOURTE () {
+jv_pg_ct_STOP
+citations=("J'ai ouvert mon placard, Et j'ai raconté une blague à mes vêtements...Ils étaient pliés !!!" "L'intelligence, c'est comme un parachute : quand on n'en a pas, on s'écrase !" "Si la matière grise était rose, personne n'aurait plus d'idées noires." "Pourquoi une blonde jette-t-elle un seau d'eau sur son ordinateur ? Réponse pour surfer sur internet ?" "c'est tu ce que signifie P C ? Plantage Constant..." "Une femme discute avec une amie : J'ai un mari en or. L'autre lui répond: le mien, il est en taule." "Deux asticots se retrouvent dans une pomme : - Tiens ! Je na savais pas que vous habitiez le quartier !")
+echo "${citations[$RANDOM % ${#citations[@]} ]}"
+}
+
+
+jv_pg_ct_PASCOMPRIS () {
+jv_pg_ct_STOP
+citations=("Je n'ai pas saisie ce que tu me demandes... " "Quoi ? qu'est ce que tu dis ?" "Reformule mieux je ne comprends pas !" "Je ne parle pas le petit chinois, répète ?" "Articules mieux j'ai pas compris ?" "Peux-tu répèter, je suis sourd d'oreille" "Mauvaise formulation, que dis-tu ?" "Je n'ai pas appris ce ue tu souhaites, reformule" "Demandes-moi le autrement, je n'ai pas saisie..." "Quoi que dis-tu ? " "Language non saisie,  que dis-tu ? ")
+echo "${citations[$RANDOM % ${#citations[@]} ]}"
+}
+
+
 
 
 
