@@ -10,29 +10,32 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-Permet de jouer avec Jarvis en mode Turing (chatboot � la francaise jarvis).
+Version 2 le 25/12/2016
+Pour Jouer avec Jarvis en mode Turing (chatbot à la Française pour Jarvis)
 
-Les discutions sont differentes a chaque fois...
 
-(Projet en cours de developpement...)
+Les discutions sont différentes à chaque fois...
+
+(Projet en cours de développement...)
 
 ## Usage
 ```
 You: On Discute ?
-Jarvis:  moi c'est Jarvis, tu es bien jibe ?
+Jarvis:  moi c'est Jarvis, tu es bien jibé ?
 
 You:non
 Jarvis:comment puis je t'appeler ? 
 
 
 You: Pascal
-Jarvis: Enchante Pascal, je peux commencer par poser une question ?
+Jarvis: Enchanté Pascal, je peux commencer par poser une question ?
 
 You: oui va y
-Jarvis: Quel est ton sport prefere ?
+Jarvis: Quel est ton sport préféré ?
 
-You: on arr�tte.
-Jarvis: Ok fin de notre conversation...
+You: on arrêtte.
+
+Et là ca bug.... impossible à arrêter...  lol
 
 ...
 ...
