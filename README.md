@@ -10,7 +10,7 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-Permet de jouer avec Jarvis en mode Turing.
+Permet de jouer avec Jarvis en mode Turing (chatboot à la francaise jarvis).
 
 Les discutions sont differentes a chaque fois...
 
