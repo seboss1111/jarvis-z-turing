@@ -81,7 +81,11 @@ NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
 
 jv_pg_ct_moicest () {
 jv_pg_ct_STOP
+if [ "$trigger" = "Jarvis" ]; then
+  citations=("Mois c'est Jarvis" "Je m'appelle Jarvis" "Mon nom est Jarvis" "On m'appelle Jarvis" "Je suis Jarvis" "On me nomme Jarvis")
+else
   citations=("Mois c'est Jarvis $trigger" "Je m'appelle Jarvis $trigger" "Mon nom est Jarvis $trigger" "On m'appelle Jarvis $trigger" "Je suis Jarvis $trigger" "On me nomme Jarvis $trigger")
+fi
   echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -579,7 +583,7 @@ jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 echo "$order" > $CHEMIN/$NOMAQUI/QUESTIONHASARD5.txt
 # Film ?
-citations=("James Bond, agent zéro zéro 7" "Avenger" "Super man" "l'émission super Nani")
+citations=("IRON MAN de 2008 car c'est de là que Alexndre Mély à eu l'idée de prendre mon nom Jarvis" "IMITATION GAME de 2014 qui reprend la vie de Alan Turing, Le test de Turing est une proposition de test d'intelligence artificielle fondée sur la faculté d'une machine à imiter la conversation humaine." "Her en 2014, teste notre réflexion sur la dernière frontière entre l’humanité et les machines, la chair et le virtuel" "A.I. Intelligence Artificielle de 2001, histoire de robot humain" "I Robot de 2004" "EX Machina de 2015,  interaction avec le représentant d’une nouvelle intelligence artificielle apparaissant sous les traits d’une très jolie femme robot prénommée Ava.")
  echo "$order ok, Mon film préféré est ${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
