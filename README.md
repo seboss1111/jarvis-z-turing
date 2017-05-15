@@ -10,13 +10,13 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
+Version 3 le 15/05/2017
 Version 2 le 25/12/2016
 Pour Jouer avec Jarvis en mode Turing (chatbot à la Française pour Jarvis)
 
 
 Les discutions sont différentes à chaque fois...
 
-(Projet en cours de développement...)
 
 ## Usage
 ```
