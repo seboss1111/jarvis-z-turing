@@ -10,9 +10,12 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
+Version 3 le 25/05/2017 Rebatisé afin qu'il s'installe automatiquement à la fin des plugins...
 Version 3 le 15/05/2017
 Version 2 le 25/12/2016
+
 Pour Jouer avec Jarvis en mode Turing (chatbot à la Française pour Jarvis)
+ça permet de rendre Jarvis comme un assistant ayant plusieurs réponses au lieu d'une comme un simple robot...
 
 
 Les discutions sont différentes à chaque fois...

@@ -35,8 +35,11 @@ GOTO3==jv_pg_ct_renvoiquestion; jv_pg_ct_ENRECONV
 >>>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>>>(*)==jv_pg_ct_ENRECONV; say "$(jv_pg_ct_FINDEQUESTIONOUVERTE)"; echo "jv_pg_ct_citationt" > $CHEMIN/choixquestion.txt; commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return
 
-GOTO4==say " "
+GOTO444==say " "
 >(*)==say " "; if test -e "$CHEMIN/choixquestionsuite.txt"; then jv_pg_ct_QUESTIONHASARD8 `cat $CHEMIN/choixquestionsuite.txt`; commands="$(jv_get_commands)"; jv_handle_order "GOTO4"; return; else say " "; commands="$(jv_get_commands)"; jv_handle_order "GOTO2"; return;  fi
+
+GOTO4==say " "
+>(*)==say " "; if test -e "$CHEMIN/choixquestionsuite.txt"; then `$(echo cat $CHEMIN/choixquestion.txt)` `cat $CHEMIN/choixquestionsuite.txt`; commands="$(jv_get_commands)"; jv_handle_order "GOTO4"; return; else say " "; commands="$(jv_get_commands)"; jv_handle_order "GOTO2"; return;  fi
 
 
 GOTOFIN==say "$STOPCONVERSATION";commands="$(jv_get_commands)"; jv_handle_order "GOTOFINOK"
@@ -78,8 +81,8 @@ GOTOEXTERNE==say "Est ce que tu vas bien ?"
 *lOl*|*RIRE*==say "$(jv_pg_ct_RIRE)"
 *MERCI*==say "$(jv_pg_ct_MERCI)"
 # [^ ]+ (*)
-# *TA GUEULE*|*FILS DE*|*SALOPE*|*CONNASSE*|*POUFIASSE*|*CONNARD*|*PUTE*|*PUTIN*|*ENCUL*==say " $(jv_pg_ct_GROSMOT)"
-*TA GUEUL[^ ]+ (*)|*FILS D[^ ]+ ()*|*SALOP[^ ]+ (*)|*CONNASS[^ ]+ (*)|*POUFIASS[^ ]+ (*)|*CONNAR[^ ]+ (*)|*PUT[^ ]+ (*)|*ENCU[^ ]+ (*)==say " $(jv_pg_ct_GROSMOT)"
+# *TA GUEULE*|*FILS DE*|*SALOP*|*CONNASS*|*POUFIASS*|*CONNAR*|*PUTE*|*PUTIN*|*ENCUL*|*ES*CHIAN*==say " $(jv_pg_ct_GROSMOT)"
+*TA GUEUL[^ ]+ (*)|*FILS D[^ ]+ ()*|*SALOP[^ ]+ (*)|*CONNASS[^ ]+ (*)|*POUFIASS[^ ]+ (*)|*CONNAR[^ ]+ (*)|*PUT[^ ]+ (*)|*ENCU[^ ]+ (*)|*ES*CHIAN[^ ]+ (*)==say " $(jv_pg_ct_GROSMOT)"
 
 *JE*M*ENNUI*==say "$(jv_pg_ct_MOTIVATION)" 
 COMMENT*APPEL*==say "Je m'appelle $trigger et toi ?"

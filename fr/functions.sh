@@ -34,7 +34,7 @@ return
 
 
 
-jv_pg_ct_QUESTIONHASARD () {
+jv_pg_ct_QUESTIONHASARD () { # ----------------------------------------------------------------- Pour les questions de base
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 
@@ -73,7 +73,6 @@ orc_test_var_num_a=$(( $orc_test_var_num_a + 1 ))
 
 	jv_pg_ct_QUESTIONHASARDSUITE0
 
-	say "$(jv_pg_ct_APPROFONDIRQUESTION)"
 	jv_pg_ct_QUESTIONHASARDSUITE
 	return
 	fi
@@ -97,7 +96,8 @@ orc_test_var_num_b="1"
 numberS=$[($RANDOM % ($[$orc_test_var_max - $orc_test_var_min] + 1)) + $orc_test_var_min]
 }
 
-jv_pg_ct_QUESTIONHASARDSUITE () {
+jv_pg_ct_QUESTIONHASARDSUITE () {  # ----------------------------------------------------------------- Quand les questions de base sont posé on passe à la suite
+
 
 jv_pg_ct_verifavecquijeparle
 
@@ -130,6 +130,7 @@ orc_test_var_num_b=$(( $orc_test_var_num_b + 1 ))
 	else
 
 ####	echo "UUUUUUUUUUUUUUUUUU je vais à jv_pg_ct_QUESTIONHASARDSUITE1 FIN.....   UUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+	# echo "$order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD$1suite.txt
 	jv_pg_ct_QUESTIONHASARDSUITE1
 	return
 	fi
@@ -139,6 +140,7 @@ else
 if [ "$choixQUESTIONHASARD" = "Fin" ]; then
 citations=("En fait, je n'ai plus de question à  te poser lol..." "Je suis à cours de question..." "Je ne sais plus quoi te poser comme question..." "Ma base de donnée est pleine, je n'ai plus de question à te poser..." "Je suis en rupture de question..." "Je sèche et je n'ai plus de question en tête...")
 say "${citations[$RANDOM % ${#citations[@]} ]}"
+say "FIN1 JB"
 return
 fi
 
@@ -262,16 +264,22 @@ fi
 fi
 }
 
-jv_pg_ct_QUESTIONHASARDSUITE1 () {
+jv_pg_ct_QUESTIONHASARDSUITE1 () {   # ----------------------------------------------------------------- Question de base ok, suite des ces questions ok... ici j'enregiste la réponse
+
 jv_pg_ct_verifavecquijeparle
 order=`$(echo cat $CHEMIN/repquestion.txt)`
 QUESTIONHASARDSUITE1="$1"
 # QUESTIONHASARDSUITE1="2"
-# echo "Je suis à jv_pg_ct_QUESTIONHASARDSUITE1 avec S1=$1 et order=$order"
+echo "$order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD$1suite.txt
 
-# echo "$(jv_pg_ct_affirmatif) $order, $(jv_pg_ct_PREPOSITIONSAFFIMATIVE_SANS_ORDER) "
 
-say "$(jv_pg_ct_affirmatif1)"
+if test -z "$QUESTIONHASARDSUITE1"; then
+say "$(jv_pg_ct_affirmatif1) $(jv_pg_ct_APPROFONDIRFINQUESTION)"
+return
+fi
+
+return
+
 
 if [ "$QUESTIONHASARDSUITE1" = "1" ]; then # réponse date de naissance complète
 local date1=$(date +%Y)
@@ -378,9 +386,18 @@ AGE=`echo "$order" | egrep -o '[[:digit:]]*'`
 
 
 if [ "$AGE" = "" ]; then
-say "Oups, je n'ai pas saisie ton age..."
+say "Oups, symbole utilisé non reconnu..."
 else
-	if [ "$AGE" -le "13" ]; then
+
+	if [ "$AGE" -le "3" ]; then
+	say "ça m'étonnerai beaucoup... un enfants de $AGE ne sait pas encore parler !!!"
+	say "Allez, tu as quel age exactement petit plaisantin ?"
+	echo "jv_pg_ct_QUESTIONHASARD1" > $CHEMIN/choixquestion.txt
+	echo "tropjeune" > $CHEMIN/choixquestionsuite.txt
+	return
+	fi
+
+	if ([ "$AGE" -ge "3" ] && [ "$AGE" -le "13" ]); then
 	say "Tu es encore un enfant de $AGE ans !, écoute tes parents car il t'aime beaucoup"
 	fi
 
@@ -413,8 +430,23 @@ else
 	fi
 
 	if [ "$AGE" -ge "101" ];  then
-	say "$AGE ans ! Ce n'est pas possible que tu soit aussi vieux !"
+	say "$AGE ans ! Ce n'est pas possible que tu sois aussi vieux !"
+	say "Allez, tu as quel age exactement petit plaisantin ?"
+	echo "jv_pg_ct_QUESTIONHASARD1" > $CHEMIN/choixquestion.txt
+	echo "vieux" > $CHEMIN/choixquestionsuite.txt
+	return
 	fi
+
+	if ([ "$AGE" -ge "5" ] && [ "$AGE" -le "99" ]); then
+		verifsiokoupassupp="$CHEMIN/choixquestionsuite.txt"
+		if test -e "$verifsiokoupassupp"; then
+		sudo rm "$verifsiokoupassupp"
+		say "ok, j'espère que je ne te dérange pas au moins ?"		
+		return
+		fi
+	fi
+
+
 fi
 
 citations=("tu vas encore grandir !" "Un an de plus tous les 365 jours" "tant que le cœur bat, la vie pousse" "il y a encore plein de belles choses à  accomplir" "la vie nous mène à  faire plain de chose encore" "aller jour après jour on finira par avoir 1 an de plus ")
@@ -684,7 +716,7 @@ citations=("IRON MAN de 2008 car c'est de là que Alexndre Mély à eu l'idée d
 say "$order ok,"
 say "$resultat1."
 say " "
-say "$(jv_pg_ct_moi), mon film préféré, je refléchis:"
+say "$(jv_pg_ct_moi), mon film préféré, je réfléchis:"
 say "${citations[$RANDOM % ${#citations[@]} ]}"
 jensuisanum=`$(echo cat $CHEMIN/choixquestion.txt) | tail -c 2`
 order=`$(echo cat $CHEMIN/repquestion.txt)`
@@ -732,24 +764,35 @@ jv_pg_ct_QUESTIONHASARD7 () {
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 # Marié ?
-if [ "$order" = "GOTO2" ]; then
-order=`$(echo cat $CHEMIN/repquestion.txt)`
-else
-echo "$order" > $CHEMIN/$NOMAQUI/QUESTIONHASARD7.txt
+
+verifsiokoupassupp="$CHEMIN/choixquestionsuite.txt"
+if test -e "$verifsiokoupassupp"; then
+# order=`$(echo cat $CHEMIN/repquestion.txt)`
+echo "$order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD7suite.txt
+sudo rm "$verifsiokoupassupp"
+say "ok, j'espère que je ne te dérange pas au moins ?"		
+return
 fi
 
-citations=("ca serait avec jibé mon créateur de ce plugin" "j'aimerai que ce soit avec celui qui m'a fait, il se nomme jibé ! es-tu ok pour que je lui demande sa main ?" "j'aimerai mais avec qui ? tu as une idée ?" "je ne sais pas ce que c'est être marié, on s'amuse bien ?" "est ce que c'est bien d'être marié ?" "j'en ai pas encore et toi ? es-tu heureux depuis ?")
+
+citationsmariage=("ca serait avec jibé mon créateur de ce plugin, tu veux bien être mon témoin ?" "j'aimerai que ce soit avec celui qui m'a fait, il se nomme jibé ! es-tu ok pour que je lui demande sa main ?" "j'aimerai mais avec qui ? tu as une idée ?" "je ne sais pas ce que c'est être marié, on s'amuse bien ?" "est ce que c'est bien d'être marié ?" "j'en ai pas encore et toi ? es-tu heureux depuis ?")
 say "$order $(jv_pg_ct_ReponsePREAFFIRMATIVE),"
 say " "
-say "si j'avais un mari ... ${citations[$RANDOM % ${#citations[@]} ]} "
+say "Ha si j'avais un mari ... ${citationsmariage[$RANDOM % ${#citationsmariage[@]} ]} "
 jensuisanum=`$(echo cat $CHEMIN/choixquestion.txt) | tail -c 2`
-order=`$(echo cat $CHEMIN/repquestion.txt)`
-echo "$order" > $CHEMIN/$NOMAQUI/QUESTIONHASARD$jensuisanum.txt
+
+echo "jv_pg_ct_QUESTIONHASARD7" > $CHEMIN/choixquestion.txt
+echo "cestbienmarié" > $CHEMIN/choixquestionsuite.txt
+echo "$order" > $CHEMIN/$NOMAQUI/QUESTIONHASARD7.txt
+return
 
 }
 
 jv_pg_ct_QUESTIONHASARD8 () {
 # echo "=========================1=$1====order=$order===============je suis à jv_pg_ct_QUESTIONHASARD8..."
+
+echo "jv_pg_ct_QUESTIONHASARD8" > $CHEMIN/choixquestion.txt
+
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 # Combien de Frère et Sœurs
@@ -772,14 +815,6 @@ jaisoeur=`echo $nompoursoeuretfrere | cut -d "=" -f2-3 |  cut -d " " -f4`
 egalfrereosuerexiste=`cat $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt | grep -o "=" | wc -w`
 egalfrereosuerexiste1=`cat $CHEMIN/choixquestion.txt`
 # `cat /home/pi/jarvis/plugins_installed/Jarvis-Turing/conversations/JB/QUESTIONHASARD8.txt | grep -o "=" | wc -w`
-
-
-
-
-# ##########################################################################################################################
-# 1) le fichier $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt n'existe pas, le créer et poser la question combien de frère et soeur
-# ##########################################################################################################################
-
 # echo "YYYYYYYYYYYYYYYYYYYYY 1=$1 egalfrereosuerexiste=$egalfrereosuerexiste order=$order YYYYYYYYYYYYYYYYYYYYYYYYYY"
 if [[ "$1" =~ "questionsuivante" ]];  then
 # if [[ "$1" =~ "questionsuivante" ]] || [[ "$1" =~ "prêt" ]];  then
@@ -902,6 +937,7 @@ if [[ "$1" =~ "filsunique" ]]; then
 say "Est-ce que vous auriez aimé avoir un frère ou une soeur ?"
 	echo "enfant gaté, $order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt
 	echo "avoirfreresoeur" > $CHEMIN/choixquestionsuite.txt
+	echo "jv_pg_ct_QUESTIONHASARD8" > $CHEMIN/choixquestion.txt
 	return
 fi
 
@@ -1056,12 +1092,17 @@ fi
 
 if [[ "$1" =~ "tueslaine" ]]; then
 echo "tueslaine= $order" >> $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt
-say "J'espère que je ne suis pas trop curieuse... je ne te dérange pas ?"
-echo "tueslaine" > $CHEMIN/choixquestionsuite.txt
-sudo rm $CHEMIN/choixquestionsuite.txt
-return
+	if [[ "$order" =~ "dire" ]]; then 
+	say "Je reprends, l'ainé signifie est-ce que tu es le plus jeune ?"
+	echo "tueslaine" > $CHEMIN/choixquestionsuite.txt
+	return
+	else
+	say "J'espère que je ne suis pas trop curieuse... je ne te dérange pas ?"
+	echo "tueslaine" > $CHEMIN/choixquestionsuite.txt
+	sudo rm $CHEMIN/choixquestionsuite.txt
+	return
+	fi
 fi
-
 
 if [[ "$1" =~ "FIN" ]]; then
 sudo rm $CHEMIN/choixquestionsuite.txt
@@ -1492,7 +1533,7 @@ jv_pg_ct_verifavecquijeparle
 
 jv_pg_ct_NON () {
 jv_pg_ct_verifavecquijeparle
-    citations=("Pourquoi non ?, $NOMAQUI" "et si tu disait oui ?" "parle positif..." "Reprends ta réponse !" "ok c'est ton dernier mot ?")
+    citations=("Pourquoi non ?, $NOMAQUI" "et si tu disais oui ?" "parle positif..." "Reprends ta réponse !" "ok c'est ton dernier mot ?")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
@@ -1618,12 +1659,6 @@ citations=("Actuellement, " "En ce moment," "A cet instant, " "Je pencherai ")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
-jv_pg_ct_on_continue () {
-jv_pg_ct_STOP
-citations=("aller on continue, " "j'adore te poser des questions, " " " "Ca me plait ces questions, " "Je poursuis ma curiosité, " " " "je souhaite en apprendre d'avantage sur toi", "Ok, " "Je poursuis mes questions, " " " "encore une question: " "je suis curieuse, " "allez, continuons si tu veux bien, " "en avant tous les deux, voici ma prochaine question: " " ")
-say "${citations[$RANDOM % ${#citations[@]} ]}"
-}
-
 jv_pg_ct_PASCOMPRIS () {
 jv_pg_ct_STOP
 if test -z "$RETOURPOLITESSE"; then
@@ -1642,17 +1677,27 @@ echo "${citations[$RANDOM % ${#citations[@]} ]}"
 
 jv_pg_ct_AVEZDIT () {
 jv_pg_ct_STOP
-citations=("" "" "" "" "" "je t'avais posé la question: " "j'avais enregistré la dernière fois: " "à notre dernière conversation tu m'avais dit: " "un petit retour en arrière, tu m'avais dit: " "Souviens-tu que tu m'avais dit: " "Tu te souviens que tu m'as dit: " "Te souviens-tu quand tu m'as répondu:" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
+citations=("" "" "" "" "" "je t'avais posé la question: " "j'avais enregistré la dernière fois: " "sur le thème précédent:" "à notre dernière conversation tu m'avais dit: " "un petit retour en arrière, tu m'avais dit: " "Souviens-tu que tu m'avais dit: " "Tu te souviens que tu m'as dit: " "Te souviens-tu quand tu m'as répondu:" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "")
 # citations=("je t'avais posé la question: " "j'avais enregistré la dernière fois: " "à notre dernière conversation tu m'avais dit: " "un petit retour en arrière, tu m'avais dit: " "Souviens-tu que tu m'avais dit à ma question: " "Tu te souviens que tu m'as dit à cette question: " "Te souviens-tu quand tu m'as répondu à ma question:" "Approfondissons tes réponses précédentes:")
+echo "${citations[$RANDOM % ${#citations[@]} ]}"
+}
+
+jv_pg_ct_APPROFONDIRFINQUESTION () {
+jv_pg_ct_STOP
+citations=("en fait, je t'ai posé toutes les questions de base que je voulais..." "j'ai fait le tour des questions qui me trottaient dans ma mémoire... " "je sais plus trop quoi te poser comme question..."  "je recherche en vain une question suplémentaire mais je ne trouve pas...")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 jv_pg_ct_APPROFONDIRQUESTION () {
 jv_pg_ct_STOP
-citations=("En fait, je t'ai posé toutes les questions de base que je voulais..."     "J'ai fait le tour des questions qui me trottaient dans ma mémoire... "      "Ce je sais plus trop quoi te poser comme question..."  "Je recherche en vain une question suplémentaire..."   " "     " "     " "     " ")
+citations=("continuons..." "allons plus loins..." "petit retour en arrière..." "un feed bak..." "reprenons...")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
 }
 
 
-
+jv_pg_ct_on_continue () {
+jv_pg_ct_STOP
+citations=("parfait, " "j'adore te poser des questions, " " " "Ca me plait ces questions, " "Je poursuis ma curiosité, " " " "je souhaite en apprendre d'avantage sur toi", "Ok, " "Je poursuis, " " " "encore une question, " "je suis curieuse, " "allez, si tu veux bien, " "en avant tous les deux, " "voici ma prochaine interrogation, " "poursuivons notre discution," " ")
+say "${citations[$RANDOM % ${#citations[@]} ]} $(jv_pg_ct_APPROFONDIRQUESTION)"
+}
 
