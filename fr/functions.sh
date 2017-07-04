@@ -676,7 +676,7 @@ if [[ "$ord" =~ ^[-+]?[0-9]+$ ]]; then
 	fi
 
 	if [[ "$ord" -gt "10" ]]; then
-	say "$AGE, c'est une mauvaise réponse."
+	say "$ord, c'est une mauvaise réponse."
 	echo "jv_pg_ct_QUESTIONHASARD4" > $CHEMIN/choixquestion.txt
 	sudo rm $CHEMIN/$NOMAQUI/QUESTIONHASARD4.txt
 	# commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return;
@@ -1305,11 +1305,23 @@ if [ -d "$CHEMIN" ]; then
 NOMAQUI=`echo $(cat $CHEMIN/nomaqui.txt)`
 return
 else
-echo "C'est la première fois que quelqu'un me parle... "
+echo "Ha que je suis super contente..."
+echo "je me trouve dans un nouveau lieu..."
+echo "et c'est la première fois que quelqu'un me parle... "
+echo "Si je ne me trompe pas je suis avec $username !? enchanté... je suis Jarvisse votre assistante personnel"
+echo "merci de m'avoir mis à cette place, je sens que je vais passer d'agréables moments avec vous..."
+echo "Prononcez:"
+echo "$trigger "
+echo "pour commencer à discuter avec moi"
+echo "à tout moment il te suffit de dire que tu veux de l'aide pour mieux m'utiliser."
+echo "mais désolé, je t'ai coupé, tu étais entrain de me demander quoi ?"
+order=""
 mkdir -p $CHEMIN
 NOMAQUI="Alexandre Mely"
 echo "$NOMAQUI" > $CHEMIN/nomaqui.txt
-return
+commands="$(jv_get_commands)"; jv_handle_order "GOTOFINOK"; return;
+return;
+
 fi
 }
 
