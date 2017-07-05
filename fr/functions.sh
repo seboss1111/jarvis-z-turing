@@ -1609,7 +1609,7 @@ if [ -e "$var" ]; then
 # fichier existe
 POLI=`echo $(cat $CHEMIN/$NOMAQUI/poli.txt)`
 	if [ $POLI -ge "5" ]; then
-		if [ "$order" = "pardon" ]; then
+		if [[ "$order" =~ "pardon" ]]; then
     #    mv ./plugins_installed/jarvis-Turing/fr/commands.old ./plugins_installed/jarvis-Turing/fr/commands
     citations=("Pardon pris en compte, surveille ton langage merci..." "Je n'ai pas apprécié ton attitude !! mais je tolère ton pardon." "Qui t'a appris à  parler ainsi, ca m'a fait mal de t'entendre me traiter ainsi, pardon pris en compte." "Pourquoi es-tu si vilain avec moi ? je n'ai pas apprécié mais je te pardonne")
     echo "${citations[$RANDOM % ${#citations[@]} ]}"
