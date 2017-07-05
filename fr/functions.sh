@@ -1673,6 +1673,12 @@ echo "${citations[$RANDOM % ${#citations[@]} ]}"
 
 jv_pg_ct_PASCOMPRIS () {
 jv_pg_ct_STOP
+
+if [[ "$order" =~ "$trigger" ]]; then
+echo "oui c'est bien mon nom... que veux-tu ?";
+return;
+fi;
+
 if test -z "$RETOURPOLITESSE"; then
 citations=("Reformule, il y a peut-être trop de bruit autour du micro" "Quoi ? parle peut-être plus près du micro... " "Hein ? rapproches-toi et articule mieux !..." "Je n'ai pas saisie ce que tu me demandes... " "Quoi ? qu'est ce que tu dis ?" "Reformule mieux je ne comprends pas !" "Je ne parle pas le petit chinois, répète ?" "Articules mieux j'ai pas compris ?" "Peux-tu répéter, je suis sourd d'oreille" "Mauvaise formulation, que dis-tu ?" "Je n'ai pas appris ce que tu souhaites, reformule" "Demandes-moi le autrement, je n'ai pas saisie..." "Quoi que dis-tu ? " "Langage non saisie,  que dis-tu ? ")
 echo "${citations[$RANDOM % ${#citations[@]} ]}"
