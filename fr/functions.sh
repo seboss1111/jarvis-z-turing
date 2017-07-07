@@ -38,14 +38,14 @@ jv_pg_ct_QUESTIONHASARD () { # -------------------------------------------------
 jv_pg_ct_STOP
 jv_pg_ct_verifavecquijeparle1
 
-QUESTIONHASARD1="Tu as quel âge ?"
-QUESTIONHASARD2="Quel est ta couleur préféré ?"
-QUESTIONHASARD3="Quel sport aime tu faire  ?"
-QUESTIONHASARD4="Concernant ta forme... Comment te sens-tu sur une echelle de 1 à 10  ?"
-QUESTIONHASARD5="Quel est ton film préféré ?"
-QUESTIONHASARD6="qu'est ce que tu aimes manger ?"
-QUESTIONHASARD7="Tu es marié ?"
-QUESTIONHASARD8="Tu as combien de frères et sœurs ?"
+QUESTIONHASARD1="Quel est votre âge ?"
+QUESTIONHASARD2="Quel est votre couleur préféré ?"
+QUESTIONHASARD3="Quel sport aimez-vous faire  ?"
+QUESTIONHASARD4="Concernant ta forme... Comment vous sentez-vous sur une echelle de 1 à 10  ?"
+QUESTIONHASARD5="Quel est votre film préféré ?"
+QUESTIONHASARD6="qu'est ce que vous aimez manger ?"
+QUESTIONHASARD7="Êtes vous marié ?"
+QUESTIONHASARD8="Combien de frères et sœurs avez vous?"
 
 # ############################ Pour faire du forcing à une 1ere question enlever le dièse ci dessous
 # number="3"
@@ -138,7 +138,7 @@ else
 #### echo "---------choixQUESTIONHASARD=$choixQUESTIONHASARD--------"
 
 if [ "$choixQUESTIONHASARD" = "Fin" ]; then
-citations=("En fait, je n'ai plus de question à  te poser lol..." "Je suis à cours de question..." "Je ne sais plus quoi te poser comme question..." "Ma base de donnée est pleine, je n'ai plus de question à te poser..." "Je suis en rupture de question..." "Je sèche et je n'ai plus de question en tête...")
+citations=("En fait, je n'ai plus de question à vous posez..." "Je suis à cours de question..." "Je ne sais plus quoi vous poser comme question..." "Ma base de donnée est pleine, je n'ai plus de question à vous poser..." "Je suis en rupture de question..." "Je sèche et je n'ai plus de question en tête...")
 say "${citations[$RANDOM % ${#citations[@]} ]}"
 say "FIN1 JB"
 return
@@ -155,9 +155,9 @@ date1=$(( $date1 - $var5))
 say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
-say "$var5 ans, c'est ton âge ok... donc tu es né je pense en $date1, mais quelle est ta date de naissance exactement ?"
+say "$var5 ans, c'est votre âge ok... donc vous êtes né je pense en $date1, mais quelle votre ta date de naissance exactement ?"
 else
-say "que tu avais: $var5 ans, soit je pense que tu es né en $date1, quelle est ta date de naissance exactement ?"
+say "que tu avais: $var5 ans, soit je pense que vous êtes né en $date1, quelle est votre date de naissance exactement ?"
 fi
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 1" > $CHEMIN/choixquestion.txt
 return
@@ -167,11 +167,11 @@ if [ "$choixQUESTIONHASARD" = "2" ]; then
 say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
-adireici=" m'avais tu dit"
+adireici=" m'avais vous dit"
 else
-say "$var5 est la réponse à ta couleur préféré... pour quelle raison as tu fais ce choix ?"
+say "$var5 est la réponse à votre couleur préféré... pour quelle raison avez vous fait ce choix ?"
 fi
-say "Pour toi ta couleur préféré tu m'as répondu: $var5, pour quelle raison as tu fais ce choix ?"
+say "Pour votre couleur préféré vous m'avez répondu: $var5, pour quelle raison avez vous fait ce choix ?"
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 2" > $CHEMIN/choixquestion.txt
 return
 fi
@@ -180,9 +180,9 @@ if [ "$choixQUESTIONHASARD" = "3" ]; then
 say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
-say "$var5 est ton sport préféré. pour quelle raison as tu fais ce choix ?"
+say "$var5 est ton sport préféré. pour quelle raison avez vous fait ce choix ?"
 else
-say "quel est ton sport préféré ? tu m'as dit: $var5, pour quelle raison as tu fais ce choix ?"
+say "quel est ton sport préféré ? tu m'as dit: $var5, pour quelle raison avez vous fait ce choix ?"
 fi
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 3" > $CHEMIN/choixquestion.txt
 return
@@ -195,7 +195,7 @@ adireici=" m'avais tu dit"
 else
 say "$adirela"
 fi
-say " $var5 sur une echelle de 1 à 10$adireici. Et maintenant tu te trouves à quel niveau ?"
+say " $var5 sur une echelle de 1 à 10$adireici. Et maintenant vous vous trouvez à quel niveau ?"
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 4" > $CHEMIN/choixquestion.txt
 return
 fi
@@ -205,9 +205,9 @@ say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
 adireici=" m'avais tu dit"
-say "$var5 est la réponse à ton film préféré. pour quelle raison as tu fais ce choix ?"
+say "$var5 est la réponse à votre film préféré. pour quelle raison avez vous fait ce choix ?"
 else
-say "quel est ton film préféré ? tu m'as dit: $var5, pour quelle raison as tu fais ce choix ?"
+say "quel est ton film préféré ? tu m'as dit: $var5, pour quelle raison avez vous fait ce choix ?"
 fi
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 5" > $CHEMIN/choixquestion.txt
 return
@@ -217,9 +217,9 @@ if [ "$choixQUESTIONHASARD" = "6" ]; then
 say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
-say "$var5 est ce que tu aimes manger. pour quelle raison as tu fais ce choix ?"
+say "$var5 est ce que vous aimez manger. pour quelle raison avez vous fait ce choix ?"
 else
-say "qu'est ce que tu aimais manger ? et tu m'as dis: $var5, pour quelle raison as tu fais ce choix ?"
+say "qu'est ce que vous aimiez manger ? et tu m'as dis: $var5, pour quelle raison avez vous fait ce choix ?"
 fi
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 6" > $CHEMIN/choixquestion.txt
 return
@@ -229,9 +229,9 @@ if [ "$choixQUESTIONHASARD" = "7" ]; then
 say "$(jv_pg_ct_AVEZDIT)"
 adirela="$(jv_pg_ct_AVEZDIT)"
 if [[ "$adirela" == "" ]]; then
-say "$var5 c'est ce que tu m'as dit à la question est-ce que tu es marié ? pour quelle raison as tu fais ce choix ?"
+say "$var5 c'est ce que vous m'avez dit à la question est-ce que vous êtes marié ? pour quelle raison avez vous fait ce choix ?"
 else
-say "à la question tu es marié ? tu m'as répondu $var5, pour quelle raison as tu fais ce choix ?"
+say "à la question êtes vous marié ? vous m'avez répondu $var5, pour quelle raison avez vous fait ce choix ?"
 fi
 echo "jv_pg_ct_QUESTIONHASARDSUITE1 7" > $CHEMIN/choixquestion.txt
 return
@@ -250,7 +250,7 @@ fi
 egalfrereosuerexiste1=`cat $CHEMIN/$NOMAQUI/QUESTIONHASARD8.txt | grep -o "=" | wc -w`
 # echo "egalfrereosuerexiste1=$egalfrereosuerexiste1--------------------------KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
 	if [[ "$egalfrereosuerexiste1" -gt "0" ]]; then
-	say "Il me faut trouver d'autres question pour la numéro 8 sur frères et soeur JB... à suivre ok !!!"
+	say "Il me faut trouver d'autres question pour la numéro 8 sur frères et soeur Monsieur...!!!"
 	echo "jv_pg_ct_QUESTIONHASARDSUITE1 8" > $CHEMIN/choixquestion.txt
 	return
 	else
@@ -363,7 +363,7 @@ fi
 
 
 if [ "$resultat1" = "Je n'ai rien trouvé" ]; then
-resultat1="Je n'ai rien trouvé de mieux en ce qui te concerne, "
+resultat1="Je n'ai rien trouvé de mieux en ce qui vous concerne, "
 fi
 }
 jv_pg_ct_QUESTIONHASARD1 () {
@@ -377,7 +377,7 @@ echo "$order" > $CHEMIN/$NOMAQUI/QUESTIONHASARD1.txt
 fi
 
 if [[ "$order" =~ "bientôt" ]]; then
-say "Ha j'entends que c'est bientôt ton anniversaire ! Génial !"
+say "Ha j'entends que c'est bientôt votre anniversaire ! Génial !"
 fi
 
 # Tu as quel age
@@ -391,7 +391,7 @@ else
 
 	if [ "$AGE" -le "3" ]; then
 	say "ça m'étonnerai beaucoup... un enfants de $AGE ne sait pas encore parler !!!"
-	say "Allez, tu as quel age exactement petit plaisantin ?"
+	say "Allez, quel age avez vous exactement petit plaisantin ?"
 	echo "jv_pg_ct_QUESTIONHASARD1" > $CHEMIN/choixquestion.txt
 	echo "tropjeune" > $CHEMIN/choixquestionsuite.txt
 	return
@@ -1313,8 +1313,8 @@ echo "merci de m'avoir mis à cette place, je sens que je vais passer d'agréabl
 echo "Prononcez:"
 echo "$trigger "
 echo "pour commencer à discuter avec moi"
-echo "à tout moment il te suffit de dire que tu veux de l'aide pour mieux m'utiliser."
-echo "mais désolé, je t'ai coupé, tu étais entrain de me demander quoi ?"
+echo "à tout moment il vous suffit de dire que vous voulez de l'aide pour mieux m'utiliser."
+echo "mais désolé, je vous ai coupé, vous étiez entrain de me demander quoi ?"
 order=""
 mkdir -p $CHEMIN
 NOMAQUI="Alexandre Mely"
@@ -1715,7 +1715,7 @@ echo "${citations[$RANDOM % ${#citations[@]} ]}"
 
 jv_pg_ct_on_continue () {
 jv_pg_ct_STOP
-citations=("parfait, " "j'adore te poser des questions, " " " "Ca me plait ces questions, " "Je poursuis ma curiosité, " " " "je souhaite en apprendre d'avantage sur toi", "Ok, " "Je poursuis, " " " "encore une question, " "je suis curieuse, " "allez, si tu veux bien, " "en avant tous les deux, " "voici ma prochaine interrogation, " "poursuivons notre discution," " ")
+citations=("parfait, " "j'adore vous poser des questions, " " " "Ca me plait ces questions, " "Je poursuis ma curiosité, " " " "je souhaite en apprendre d'avantage sur vous", "Ok, " "Je poursuis, " " " "encore une question, " "je suis curieuse, " "allez, vous voulez bien, " "en avant tous les deux, " "voici ma prochaine interrogation, " "poursuivons notre discution," " ")
 say "${citations[$RANDOM % ${#citations[@]} ]} $(jv_pg_ct_APPROFONDIRQUESTION)"
 }
 
