@@ -1,11 +1,11 @@
-*PARLE*VITE*==say "tempo=$tempo"; old_tempo=$tempo; tempo="1.6"; say "je parle vraiement très rapidement tempo=$tempo"
-*PARLE*NORMALEMENT*==say "tempo=$tempo"; tempo=$old_tempo; say "je reparle tout à fait normalement"
-*PARLE*LENTEMENT==say "tempo=$tempo"; tempo="1"; say "je reparle tout à fait normalement"
+*PARLE*VITE*==say "tempo=$tempo"; old_tempo=$tempo; tempo="1.6"; say "Je parle vraiement très rapidement tempo=$tempo"
+*PARLE*NORMALEMENT*==say "tempo=$tempo"; tempo=$old_tempo; say "Je reparle tout à fait normalement"
+*PARLE*LENTEMENT==say "tempo=$tempo"; tempo="1"; say "Je reparle tout à fait normalement"
 
 LECHEMIN==say "$(`$(echo cat $CHEMIN/choixquestion.txt)`)" # exécute la fonction enregistrée
 LECHEMIN1==say "`$(echo cat $CHEMIN/repquestion.txt)`" # affiche le réponse order
 LECHEMIN2==say "`$(echo "jv_pg_ct_QUESTIONHASARD1")`"
-LECHEMIN3==say "Quel est ta couleur préféré ?"
+LECHEMIN3==say "Quel est votre couleur préféré ?"
 >==GOTO1
 
 # *UNE*FRAMBOISE*==commands="$(jv_get_commands)"; jv_handle_order "GOTO1"; return;
@@ -45,13 +45,13 @@ GOTO4==say " "
 GOTOFIN==say "$STOPCONVERSATION";commands="$(jv_get_commands)"; jv_handle_order "GOTOFINOK"
 GOTOFINOK==
 
-GOTOEXTERNE==say "Est ce que tu vas bien ?"
+GOTOEXTERNE==say "Est ce que vous allez bien ?"
 >*OUI*|*CA VA*|*MERCI*==say "$(jv_pg_ct_ReponsePoitive)"
 >*NON*|*PAS*==say "$order, $(jv_pg_ct_QuetionouverteN)"
 
-*PRENOM*==say "Que se passe t-il tu n'aimes pas ton prénom ? $NOMAQUI ?"
+*PRENOM*==say "Que se passe t-il vous n'aimez pas votre prénom ? $NOMAQUI ?"
 
-*TU VAS BIEN*==say "$(jv_pg_ct_ReponseO), et toi ?"
+*TU VAS BIEN*==say "$(jv_pg_ct_ReponseO), et vous ?"
 >*OUI*|*CA VA*|*MERCI*==say "$(jv_pg_ct_ReponsePoitive)"
 >*NON*|*PAS*==say "$order, $(jv_pg_ct_QuetionouverteN)"
 >*ARRETE*==say "$(jv_pg_ct_findiscution)"
@@ -60,12 +60,12 @@ GOTOEXTERNE==say "Est ce que tu vas bien ?"
 >>>*NON*==say "$(jv_pg_ct_ReponseN)"
 >>>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 
-*CA VA*==say "$(jv_pg_ct_ReponseO), et toi ?"
->*OUI*|*CA VA*|*MERCI*==say "jv_pg_ct_QUESTIONHASARD4"
->*NON*|*PAS*==say "j'en suis navré, dois-je te laisser tranquille?"
+*CA VA*==say "$(jv_pg_ct_ReponseO), et vous ?"
+>*OUI*|*CA VA*|*MERCI*==say "$(jv_pg_ct_QUESTIONHASARD4)"
+>*NON*|*PAS*==say "j'en suis navré, dois-vous te laisser tranquille?"
 >*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>*OUI*==say "Au revoir $username"
->>*NON*==say "Ok je reste, tu veux que je te fasse rire ?"
+>>*NON*==say "Ok je reste, voulez vous que je vous fasse rire ?"
 >>*ARRETE*==say "$(jv_pg_ct_findiscution)"
 >>>*OUI*==say "$(jv_pg_ct_HISTOIRCOURTE)"
 >>>*NON*==say "Ok je te laisse tranquille"
@@ -73,7 +73,7 @@ GOTOEXTERNE==say "Est ce que tu vas bien ?"
 
 *ET TOI*==say "Et moi quoi ?"
 *ES-TU*==say "$(jv_pg_ct_QuetionouverteP)"
-# *MOI*==say "essaye d'être moin personnel, parle des autres plus que de toi et en positif surtout ok ?"
+# *MOI*==say "Essayez d'être moins personnel, parlez des autres plus que de vous et en positif surtout d'accord ?"
 *OUI*|*OK*==say "$(jv_pg_ct_OUI)"
 *NON*==say "$(jv_pg_ct_NON)"
 *POURQUOI*==say "$(jv_pg_ct_pourquoi)"
@@ -85,15 +85,15 @@ GOTOEXTERNE==say "Est ce que tu vas bien ?"
 *TA GUEUL[^ ]+ (*)|*FILS D[^ ]+ ()*|*SALOP[^ ]+ (*)|*CONNASS[^ ]+ (*)|*POUFIASS[^ ]+ (*)|*CONNAR[^ ]+ (*)|*PUT[^ ]+ (*)|*ENCU[^ ]+ (*)|*ES*CHIAN[^ ]+ (*)==say " $(jv_pg_ct_GROSMOT)"
 
 *JE*M*ENNUI*==say "$(jv_pg_ct_MOTIVATION)" 
-COMMENT*APPEL*==say "Je m'appelle $trigger et toi ?"
+COMMENT*APPEL*==say "Je m'appelle $trigger et vous ?"
 >(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
 >(*)==say "bonjour $order, $(jv_pg_ct_QUESTIONHASARD)"
 *QUEL*AGE*|*ANNE*==say "$(jv_pg_ct_AGE)"
-*BONNE NUIT*|*BONNE JOUNRNEE*==say "Toi aussi, passe une bonne $order"
+*BONNE NUIT*|*BONNE JOUNRNEE*==say "Vous aussi, passez une bonne $order"
 *J*AIME*==say "$(jv_pg_ct_aime)"
-*ENCOURAGE*==say "Tu vas y arriver j'en suis sur, ai confiance en toi!, ca va mieux ?"
->*OUI*==say "je suis très contente alors"
->*NON*==say "Et bien tu devrais sortir dehors, l'air te ferai beaucoup de bien"
+*ENCOURAGE*==say "Vous allez y arriver j'en suis sur, ayez confiance en vous!, ca va mieux ?"
+>*OUI*==say "Je suis très contente alors"
+>*NON*==say "Et bien vous devriez sortir dehors, l'air te ferai beaucoup de bien"
 
 
 (*)==say "$(jv_pg_ct_PASCOMPRIS)"
